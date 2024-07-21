@@ -11,7 +11,12 @@ db.users.aggregate([
     {
         $group: {
             _id: "$favoriteFruit",
-            count:{$sum:1} // Adding 1 for each entry
+            count: { $sum: 1 } // Adding 1 for each entry
+        }
+    },
+    {
+        $sort: {
+            count: -1
         }
     }
 ])
