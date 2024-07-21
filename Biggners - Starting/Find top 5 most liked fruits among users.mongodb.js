@@ -6,6 +6,7 @@
 
 use("aggregation");
 
+// Getting top 2 instead
 
 db.users.aggregate([
     {
@@ -18,6 +19,9 @@ db.users.aggregate([
         $sort: {
             count: -1
         }
+    },
+    {
+        $limit: 2
     }
 ])
 
