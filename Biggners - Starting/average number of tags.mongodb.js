@@ -38,11 +38,39 @@ use("aggregation");
 
 // Other way
 
+// db.users.aggregate([
+//     {
+//         $project: {
+//             tagCount: {
+//                 $size: "$tags"
+//             }
+//         }
+//     },
+//     {
+//         $group: {
+//             _id: null,
+//             averageTags: {
+//                 $avg: "$tagCount"
+//             }
+//         }
+//     },
+//     {
+//         $project: {
+//             averageTags: {
+//                 $round: ["$averageTags", 2]
+//             }
+//         }
+//     }
+// ])
+
+
+// Another way;
+
 db.users.aggregate([
     {
-        $project: {
+        $addFields: {
             tagCount: {
-                $size: "$tags"
+                $size: { $ifNull: ["$tags", []] } // Exceptiona Handeling
             }
         }
     },
@@ -53,15 +81,9 @@ db.users.aggregate([
                 $avg: "$tagCount"
             }
         }
-    },
-    {
-        $project: {
-            averageTags: {
-                $round: ["$averageTags", 2]
-            }
-        }
     }
 ])
+
 
 
 
