@@ -66,23 +66,23 @@ use("aggregation");
 
 // Another way;
 
-db.users.aggregate([
-    {
-        $addFields: {
-            tagCount: {
-                $size: { $ifNull: ["$tags", []] } // Exceptiona Handeling
-            }
-        }
-    },
-    {
-        $group: {
-            _id: null,
-            averageTags: {
-                $avg: "$tagCount"
-            }
-        }
-    }
-])
+// db.users.aggregate([
+//     {
+//         $addFields: {
+//             tagCount: {
+//                 $size: { $ifNull: ["$tags", []] } // Exceptiona Handeling
+//             }
+//         }
+//     },
+//     {
+//         $group: {
+//             _id: null,
+//             averageTags: {
+//                 $avg: "$tagCount"
+//             }
+//         }
+//     }
+// ])
 
 
 
